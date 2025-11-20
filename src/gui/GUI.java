@@ -8,6 +8,24 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
+    private final Label tomtLabel = new Label();
+    private final ListView<Konference> konferencerListView = new ListView<>();
+    private final CheckBox ledsagerCheckBox = new CheckBox("Ledsager");
+    private final TextField ledsagerTextfield = new TextField();
+    private final ListView<Udflugt> konferenceUdflugterListView = new ListView<>();
+    private final CheckBox hotelCheckBox = new CheckBox("Hotel");
+    private final ListView<Hotel> hotellerListView = new ListView<>();
+    private final ListView<Tilvalg> hotelTilvalgListView = new ListView<>();
+    private final TextField deltagerNavnTextFiled = new TextField();
+    private final TextField deltagerAdresseTextField = new TextField();
+    private final TextField deltagerByTextField = new TextField();
+    private final TextField deltagerTelefonTextField = new TextField();
+    private final DatePicker deltagerAnkomstDatePicker = new DatePicker();
+    private final DatePicker deltagerAfrejseDatePicker = new DatePicker();
+    private final CheckBox fordragsholderCheckbox = new CheckBox("Fordragsholder");
+    private final CheckBox firmaCheckbox = new CheckBox("Firma");
+    private final TextField firmaNavnTextField = new TextField();
+    private final TextField firmaTelefonTextField = new TextField();
 
     @Override
     public void start(Stage primaryStage) throws Exception {

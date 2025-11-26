@@ -71,16 +71,16 @@ public class Bestilling {
             sum += udflugt.getPris();
         }
         for (Tilvalg tilvalg : tilvalg) {
-            sum += tilvalg.getPris();
+            sum += tilvalg.getPris() * antalDage();
         }
 
-        sum += hotel.getPris(værelse);
+        sum += hotel.getPris(værelse) * antalDage();
 
         if (deltager.getStatus() != Status.FOREDRAGSHOLDER) {
-            sum += konference.getPris();
+            sum += konference.getPris() * antalDage();
         }
 
-        return sum * antalDage();
+        return sum;
     }
 
     public void addUdflugt(Udflugt udflugt) {

@@ -5,17 +5,19 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Udflugt {
-    String navn;
-    LocalDate dato;
-    int pris;
-    String tourGuide;
-    ArrayList<Ledsager> ledsagere;
-    LocalTime tidspunkt;
+    private final String navn;
+    private final LocalDate dato;
+    private final double pris;
+    private final String tourGuide;
+    private final ArrayList<Ledsager> ledsagere;
+    private final LocalTime tidspunkt;
+    private final Konference konference;
 
-    public Udflugt(String navn, LocalDate dato, int pris, String tourGuide, LocalTime tidspunkt) {
+    public Udflugt(String navn, LocalDate dato, double pris, String tourGuide, LocalTime tidspunkt, Konference konference) {
         this.navn = navn;
         this.dato = dato;
         this.pris = pris;
+        this.konference = konference;
         this.tourGuide = tourGuide;
         this.tidspunkt = tidspunkt;
         ledsagere = new ArrayList<>();
@@ -34,6 +36,7 @@ public class Udflugt {
     public void addLedsager(Ledsager ledsager) {
         if (!ledsagere.contains(ledsager)) {
             ledsagere.add(ledsager);
+            ledsager.addUdflugt(this);
         }
     }
 

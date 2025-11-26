@@ -1,23 +1,29 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Konference {
-    String navn;
-    LocalDate startdato;
-    LocalDate slutdato;
-    ArrayList<String> foredragsholdere;
-    ArrayList<Bestilling> bestillinger;
-    int pris;
+    private final String navn;
+    private final LocalDate startdato;
+    private final LocalDate slutdato;
+    private final double pris;
+    private final ArrayList<String> foredragsholdere;
+    private final ArrayList<Bestilling> bestillinger;
+    private final ArrayList<Hotel> hoteller;
+    private final ArrayList<Udflugt> udflugter;
 
-    public Konference(String navn, LocalDate startdato, LocalDate slutdato, int pris) {
+    public Konference(String navn, LocalDate startdato, LocalDate slutdato, double pris) {
         this.navn = navn;
         this.startdato = startdato;
         this.slutdato = slutdato;
+        this.pris = pris;
         foredragsholdere = new ArrayList<>();
         bestillinger = new ArrayList<>();
-        this.pris = pris;
+        hoteller = new ArrayList<>();
+        udflugter = new ArrayList<>();
     }
 
     @Override
@@ -34,16 +40,32 @@ public class Konference {
         return bestillinger;
     }
 
-    public int getPris() {
+    public double getPris() {
         return pris;
     }
 
-    public ArrayList<String> getForedragsholdere() {
-        return new ArrayList<>(foredragsholdere);
+    public ArrayList<Hotel> getHoteller() {
+        return new ArrayList<>(hoteller);
     }
 
-    public Bestilling createBestilling(LocalDate dato, Deltager deltager, Konference konference) {
-        Bestilling bestilling = new Bestilling(dato, deltager, konference);
+    public ArrayList<Udflugt> getUdflugter() {
+        return new ArrayList<>(udflugter);
+    }
+
+    public Udflugt createUdflugt(String navn, LocalDate dato, double pris, String tourGuide, LocalTime tidspunkt, Konference konference) {
+        Udflugt udflugt = new Udflugt(navn, dato, pris, tourGuide, tidspunkt, this);
+        udflugter.add(udflugt);
+        return udflugt;
+    }
+
+    public void removeUdflugt(Udflugt udflugt) {
+        if (udflugter.contains(udflugt)) {
+            udflugter.remove(udflugt);
+        }
+    }
+
+    public Bestilling createBestilling(LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager, Konference konference) {
+        Bestilling bestilling = new Bestilling(ankomstDato, afrejseDato, deltager, konference);
         bestillinger.add(bestilling);
         return bestilling;
     }
@@ -71,5 +93,4 @@ public class Konference {
             foredragsholdere.remove(foredragsholder);
         }
     }
-
 }

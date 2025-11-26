@@ -1,10 +1,12 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Bestilling {
-    private final LocalDate dato;
+    private final LocalDate ankomstDato;
+    private final LocalDate afrejseDato;
     private final int bestillingsNr;
     private static int antalBestillinger = 0;
     private final Konference konference;
@@ -13,22 +15,49 @@ public class Bestilling {
     private Hotel hotel;
     private final ArrayList<Tilvalg> tilvalg;
 
-    Bestilling(LocalDate dato, Deltager deltager, Konference konference) {
+    Bestilling(LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager, Konference konference) {
         antalBestillinger++;
         bestillingsNr = antalBestillinger;
-        this.dato = dato;
+        this.ankomstDato = ankomstDato;
+        this.afrejseDato = afrejseDato;
         this.konference = konference;
         this.deltager = deltager;
         udflugter = new ArrayList<>();
         tilvalg = new ArrayList<>();
     }
 
-    public int getBestillingsNr() {
-        return bestillingsNr;
+    public ArrayList<Tilvalg> getTilvalg() {
+        return new ArrayList<>(tilvalg);
     }
 
-    public Konference getKonference() {
-        return konference;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    private double antalDage() {
+        return ChronoUnit.DAYS.between(getAnkomstDato(), getAfrejseDato());
+    }
+
+    public LocalDate getAnkomstDato() {
+        return ankomstDato;
+    }
+
+    public LocalDate getAfrejseDato() {
+        return afrejseDato;
+    }
+
+    public void addTilvalg(Tilvalg tilvalg) {
+        if (!this.tilvalg.contains(tilvalg) && tilvalg != null) {
+            this.tilvalg.add(tilvalg);
+        }
+    }
+
+    public int getBestillingsNr() {
+        return bestillingsNr;
     }
 
     public Deltager getDeltager() {
@@ -51,6 +80,16 @@ public class Bestilling {
             sum += konference.getPris();
         }
 
-        return sum;
+        return sum * antalDage();
+    }
+
+    public void addUdflugt(Udflugt udflugt) {
+        udflugter.add(udflugt);
+    }
+
+    public void removeUdflugt(Udflugt udflugt) {
+        if (udflugter.contains(udflugt)) {
+            udflugter.remove(udflugt);
+        }
     }
 }

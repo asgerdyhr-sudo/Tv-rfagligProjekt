@@ -2,6 +2,8 @@ package gui;
 
 import controller.Controller;
 import javafx.application.Application;
+import model.Hotel;
+import model.Konference;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

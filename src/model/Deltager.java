@@ -4,26 +4,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Deltager {
-    String navn;
-    String adresse;
-    String by;
-    LocalDate ankomstdato;
-    String firmanavn;
-    Status status;
-    int telefon;
-    LocalDate afrejsedato;
-    int firmatelefon;
-    ArrayList<Bestilling> bestillinger = new ArrayList<>();
-    ArrayList<Ledsager> ledsagere = new ArrayList<>();
+    private final String navn;
+    private final String adresse;
+    private final String by;
+    private String firmanavn;
+    private final Status status;
+    private final String telefon;
+    private String firmatelefon;
+    private final ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
-    public Deltager(String navn, String adresse, String by, LocalDate ankomstdato, Status status, int telefon, LocalDate afrejsedato) {
+    public Deltager(String navn, String adresse, String by, Status status, String telefon) {
         this.navn = navn;
         this.adresse = adresse;
         this.by = by;
-        this.ankomstdato = ankomstdato;
         this.status = status;
         this.telefon = telefon;
-        this.afrejsedato = afrejsedato;
     }
 
     @Override
@@ -62,36 +57,13 @@ public class Deltager {
         return status;
     }
 
-    public int getTelefon() {
+    public String getTelefon() {
         return telefon;
-    }
-
-    public LocalDate getAfrejsedato() {
-        return afrejsedato;
-    }
-
-    public int getFirmatelefon() {
-        return firmatelefon;
-    }
-
-    public ArrayList<Bestilling> getBestillinger() {
-        return new ArrayList<>(bestillinger);
-    }
-
-    public ArrayList<Ledsager> getLedsagere() {
-        return new ArrayList<>(ledsagere);
     }
 
     public Ledsager createLedsager(String navn) {
         Ledsager ledsager = new Ledsager(navn, this);
         ledsagere.add(ledsager);
         return ledsager;
-    }
-
-
-    public void addBestilling(Bestilling bestilling) {
-        if (!bestillinger.contains(bestilling)) {
-            bestillinger.add(bestilling);
-        }
     }
 }

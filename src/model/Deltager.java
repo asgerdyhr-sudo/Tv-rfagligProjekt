@@ -26,24 +26,36 @@ public class Deltager {
         this.afrejsedato = afrejsedato;
     }
 
+    @Override
+    public String toString() {
+        String retur;
+
+        retur = "Navn: " + navn + '\n' +
+                "Adresse: " + adresse + '\n' +
+                "By: " + by + '\n' +
+                "Telefon: " + telefon + '\n' +
+                "Status: " + status + '\n';
+        if (firmanavn != null && !firmanavn.isEmpty() && firmatelefon != null && !firmatelefon.isEmpty()) {
+            retur += "Firmanavn: " + firmanavn + '\n' +
+                    "Firmatelefon: " + firmatelefon + '\n';
+        }
+        if (!ledsagere.isEmpty()) {
+            retur += "Ledsagere navn: " + ledsagere + '\n';
+        }
+
+        return retur;
+    }
+
+    public void setFirmanavn(String navn) {
+        firmanavn = navn;
+    }
+
+    public void setFirmatelefon(String telefon) {
+        firmatelefon = telefon;
+    }
+
     public String getNavn() {
         return navn;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public String getBy() {
-        return by;
-    }
-
-    public LocalDate getAnkomstdato() {
-        return ankomstdato;
-    }
-
-    public String getFirmanavn() {
-        return firmanavn;
     }
 
     public Status getStatus() {

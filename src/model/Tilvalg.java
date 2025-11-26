@@ -4,7 +4,7 @@ public class Tilvalg {
     String navn;
     double pris;
 
-    public Tilvalg(String navn, double pris) {
+    Tilvalg(String navn, double pris, Hotel hotel) {
         this.navn = navn;
         this.pris = pris;
     }

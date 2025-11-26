@@ -18,10 +18,16 @@ public class Udflugt {
         this.pris = pris;
         this.tourGuide = tourGuide;
         this.tidspunkt = tidspunkt;
-        ledsagere = new ArrayList<>(ledsagere);
+        ledsagere = new ArrayList<>();
     }
 
-    public int getPris() {
+    @Override
+    public String toString() {
+        return navn + ", D. " + dato + ", Kl: " + tidspunkt +
+                " | Guide: " + tourGuide + " | Pris. " + pris + "kr";
+    }
+
+    public double getPris() {
         return pris;
     }
 
@@ -29,6 +35,10 @@ public class Udflugt {
         if (!ledsagere.contains(ledsager)) {
             ledsagere.add(ledsager);
         }
+    }
+
+    public ArrayList<Ledsager> getLedsagere() {
+        return new ArrayList<>(ledsagere);
     }
 
     public void removeLedsager(Ledsager ledsager) {

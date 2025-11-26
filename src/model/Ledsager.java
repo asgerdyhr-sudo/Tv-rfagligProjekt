@@ -7,10 +7,19 @@ public class Ledsager {
     Deltager deltager;
     ArrayList<Udflugt> udflugter;
 
-    public Ledsager(String navn, Deltager deltager) {
+    Ledsager(String navn, Deltager deltager) {
         this.navn = navn;
         this.deltager = deltager;
         udflugter = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return  navn;
+    }
+
+    public String udskrift() {
+        return navn + " (" + deltager.getNavn() + " " + deltager.getTelefon() + ") ";
     }
 
     public String getNavn() {

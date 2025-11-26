@@ -10,8 +10,8 @@ public class Bestilling {
     private final Konference konference;
     private final Deltager deltager;
     private final ArrayList<Udflugt> udflugter;
+    private Hotel hotel;
     private final ArrayList<Tilvalg> tilvalg;
-    private final ArrayList<Hotel> hoteller;
 
     Bestilling(LocalDate dato, Deltager deltager, Konference konference) {
         antalBestillinger++;
@@ -21,7 +21,6 @@ public class Bestilling {
         this.deltager = deltager;
         udflugter = new ArrayList<>();
         tilvalg = new ArrayList<>();
-        hoteller = new ArrayList<>();
     }
 
     public int getBestillingsNr() {
@@ -45,10 +44,12 @@ public class Bestilling {
         for (Tilvalg tilvalg : tilvalg) {
             sum += tilvalg.getPris();
         }
-        for (Hotel hotel : hoteller) {
-            sum += hotel.getPris(værelse);
+
+        sum += hotel.getPris(værelse);
+
+        if (deltager.getStatus() != Status.FOREDRAGSHOLDER) {
+            sum += konference.getPris();
         }
-        sum += konference.getPris();
 
         return sum;
     }

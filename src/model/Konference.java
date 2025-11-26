@@ -20,6 +20,16 @@ public class Konference {
         this.pris = pris;
     }
 
+    @Override
+    public String toString() {
+        String foredragsholdereString = "";
+        for (String foredragsholder : foredragsholdere) {
+            foredragsholdereString += foredragsholder + ", ";
+        }
+
+        return navn + ", fra " + startdato.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " til " + slutdato.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " | " + pris + "kr \n Fordragsholder(e):" + foredragsholdereString;
+    }
+
     public ArrayList<Bestilling> getBestillinger() {
         return bestillinger;
     }
